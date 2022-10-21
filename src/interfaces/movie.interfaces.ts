@@ -7,3 +7,5 @@ export interface IMovie {
   director: string;
   imdbID: string;
 }
+
+export interface IMoviePayload extends Pick<IMovie, 'title' | 'year' | 'imdbID'> {}

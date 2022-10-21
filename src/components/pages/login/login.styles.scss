@@ -69,3 +69,15 @@
 .titleLogin {
   font-size: 28px;
 }
+
+.headerLoginForm {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.errorApiLogin {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+}

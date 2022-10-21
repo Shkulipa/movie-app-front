@@ -4,8 +4,8 @@ import useFormSearch from './useFormSearch';
 import './search.styles.scss';
 import { ChangeEvent } from 'react';
 
-export default function Search({ ...props }: ISearchProps): JSX.Element {
-  const { formSearch, errorSearch } = useFormSearch();
+export default function Search({ setSearch,  ...props }: ISearchProps): JSX.Element {
+  const { formSearch, errorSearch } = useFormSearch({ setSearch });
 
   const onChangeSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
     formSearch.handleChange(e);

@@ -1,8 +1,11 @@
 import { loginValidation } from "src/validations/login.validation";
 import { FormikHelpers, useFormik } from 'formik';
+import { useAppDispatch } from "src/hooks/redux";
 
 import { ErrorMsg } from "src/components";
 import { ILoginValues } from "../../login.interfaces";
+
+import { signUpAsync } from "src/store/actions/signup";
 
 const initialValues: ILoginValues = {
   email: '',
@@ -10,11 +13,15 @@ const initialValues: ILoginValues = {
 };
 
 export default function useFormSignUp() {
+  const dispatch = useAppDispatch();
+
   const signUpHandler = (
     { email, password }: ILoginValues,
     { setSubmitting, resetForm }: FormikHelpers<ILoginValues>
   ) => {
-    console.log('signUpHandler');
+    dispatch(signUpAsync({ email, password }));
+    setSubmitting(false);
+    resetForm();
   }
 
   const formSignUp = useFormik<ILoginValues>({

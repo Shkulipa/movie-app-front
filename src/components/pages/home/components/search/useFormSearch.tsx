@@ -2,14 +2,14 @@ import { searchValidation } from "src/validations/search.validation";
 import { useFormik } from 'formik';
 
 import { ErrorMsg } from "src/components";
-import { ISearchValues } from "./search.interfaces";
+import { ISearchValues, IUseFormSearch } from "./search.interfaces";
 import { useState } from "react";
 
 const initialValues: ISearchValues = {
   search: '',
 };
 
-export default function useFormSearch() {
+export default function useFormSearch({ setSearch }: IUseFormSearch) {
   const [t, setT] = useState<ReturnType<typeof setTimeout>>();
 
   const searchHandler = (
@@ -18,7 +18,7 @@ export default function useFormSearch() {
     if (t) clearTimeout(t);
 		setT(
 			setTimeout(
-				() => console.log(search),
+				() => setSearch(search),
 				500
 			)
 		);

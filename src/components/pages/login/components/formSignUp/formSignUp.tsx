@@ -1,13 +1,19 @@
 import { Btn, Input, Htag } from 'src/components';
+import useErrorLogin from '../../hooks/useErrorLogin';
 import { IFormSignUpProps } from './formSignUp.interfacses';
 import useFormSignUp from './useFormSignUp';
 
 export function FormSignUp({ toggleForm }: IFormSignUpProps): JSX.Element {
+  const { isError } = useErrorLogin();
 	const { formSignUp, errorEmailSignUp, errorPassSignUp } = useFormSignUp();
 
 	const signInForm = (
 		<form className='signUp' onSubmit={formSignUp.handleSubmit}>
-      <Htag className='titleLogin' tag="h2">Registration</Htag>
+       <div className='headerLoginForm'>
+        <Htag className='titleLogin' tag="h2">Registration</Htag>
+        {isError}
+      </div>
+     
 			<div className='inputWrapper'>
 				<Input
           name="email"

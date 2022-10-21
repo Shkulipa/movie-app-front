@@ -2,7 +2,7 @@ import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError 
 import { authSlice } from 'src/store/slices/auth/auth.slice';
 import { CONST } from 'src/interfaces/consts.interfaces';
 import { IAuthResponse } from 'src/interfaces/user.interfaces';
-import { IMoviePayload } from 'src/interfaces/movie.interfaces';
+import { IMovie, IMoviePayload } from 'src/interfaces/movie.interfaces';
 import { IFetchPayload } from 'src/interfaces/fetchPosts.interfaces';
 
 const baseQuery = fetchBaseQuery({
@@ -25,7 +25,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   extraOptions
 ) => {
   let result = await baseQuery(args, api, extraOptions);
-  
   if (result.error && result.error.status === 401) {
       const refreshResult = await baseQuery({
         url: '/refresh-token',
@@ -55,10 +54,8 @@ export const moviesAPI = createApi({
   tagTypes: ["Movies"],
 
   endpoints: (build) => ({
-    fetchMovies: build.query<IMoviePayload, IFetchPayload>({
+    fetchMovies: build.mutation<IMoviePayload[], IFetchPayload>({
       query: ({ search = "" }) => {
-         console.log(search) 
-        
         return {
           url: '/movie',
           method: "POST",
@@ -67,55 +64,14 @@ export const moviesAPI = createApi({
           }
         }
       },
+      invalidatesTags: () => ["Movies"]
+    }),
+    fetchPostById: build.query<IMovie, string>({
+      query: imdbid => ({
+        url: `/movie/${imdbid}`,
+        method: "GET",
+      }),
       providesTags: () => ["Movies"]
     }),
-    // fetchPostById: build.query<IPost, string>({
-    //   query: (id) => ({
-    //     url: `/post/${id}`,
-    //     method: "GET",
-    //   }),
-    //   providesTags: () => ["Post"]
-    // }),
-    // createPost: build.mutation<FormData, FormData>({
-    //   query: (body) => {
-    //     const options = ({
-    //       url: "/post",
-    //       method: "POST",
-    //       body
-    //     });
-
-    //     return options;
-    //   },
-    //   invalidatesTags: ["Post"]
-    // }),
-    // updatePost: build.mutation<IUpdatePost, IUpdatePost>({
-    //   query: (body) => {
-    //     const { _id, title, description, content } = body;
-
-    //     const options = ({
-    //       url: `/post/${_id}`,
-    //       method: "PUT",
-    //       body: {
-    //         title, description, content
-    //       }
-    //     });
-
-    //     return options;
-    //   },
-    //   invalidatesTags: ["Post"]
-    // }),
-    // deletePost: build.mutation<IUpdatePost, { id: string }>({
-    //   query: (body) => {
-    //     const { id } = body;
-
-    //     const options = ({
-    //       url: `/post/${id}`,
-    //       method: "DELETE"
-    //     });
-
-    //     return options;
-    //   },
-    //   invalidatesTags: ["Post"]
-    // })
   })
 });

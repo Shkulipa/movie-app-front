@@ -1,54 +1,42 @@
+import { moviesAPI } from 'src/services/movieAPI.service';
 import { useParams } from 'react-router-dom';
 
-import { PageLayout, Ptag, Btn } from 'src/components';
-
-import StartFill from 'src/assets/icons/star-filled.svg';
-import StartOutline from 'src/assets/icons/star-outline.svg';
+import { PageLayout, Ptag, Btn, Loader, ErrorMsg } from 'src/components';
 
 import './movie.styles.scss';
-import { useState } from 'react';
 
 export default function Movie(): JSX.Element {
-	const { imdbID } = useParams();
-  const [favorite, setFavorite] = useState(true);
-  const [favoriteHover, setFavoriteHover] = useState(false);
+	const { imdbid } = useParams();
+	/**
+	 * @info
+	 * get movie data
+	 */
+	const {
+		data: movie,
+		error,
+		isLoading
+	} = moviesAPI.useFetchPostByIdQuery(imdbid as string, { skip: !imdbid });
 
-  const toggleFavorite = () => setFavorite(s => !s);
+	const content = isLoading ? <Loader /> :(
+		<>
+			<div className='actionPanel'>
+				
+				<Btn>Delete</Btn>
+				<Btn>Edit</Btn>
+			</div>
 
-  const onMouseOverFavorite = () => setFavoriteHover(true)
-  const onMouseOutFavorite = () => setFavoriteHover(false)
-
-  const imgStarFill = <img className='star' src={StartOutline} alt='Star outline' />;
-  const imgStarOutline = <img className='star' src={StartFill} alt='Star filled' />;
-	const isFavorite = () => {
-    if(favorite && !favoriteHover) return imgStarFill;
-    if(!favorite && !favoriteHover) return imgStarOutline;
-    if(!favorite && favoriteHover) return imgStarFill;
-    if(favorite && favoriteHover) return imgStarOutline;
-  }
-
+			<Ptag size='s'>imdbid: {imdbid}</Ptag>
+			<Ptag size='s'>Title: {movie?.title}</Ptag>
+			<Ptag size='s'>Year: {movie?.year}</Ptag>
+			<Ptag size='s'>Genre: {movie?.genre}</Ptag>
+			<Ptag size='s'>Director: {movie?.director}</Ptag>
+		</>
+	);
+  console.log(movie);
 	return (
 		<PageLayout>
-			<div className='moviePage'>
-				<div className='actionPanel'>
-					<div
-            className='starWrapper'
-						onClick={toggleFavorite}
-						onMouseOver={onMouseOverFavorite}
-						onMouseOut={onMouseOutFavorite}
-					>
-						{isFavorite()}
-					</div>
-					<Btn>Delete</Btn>
-					<Btn>Edit</Btn>
-				</div>
-
-				<Ptag size='s'>imdbID: {imdbID}</Ptag>
-				<Ptag size='s'>Title: </Ptag>
-				<Ptag size='s'>Year: </Ptag>
-				<Ptag size='s'>Genre: </Ptag>
-				<Ptag size='s'>Director: </Ptag>
-			</div>
+      {error && <ErrorMsg className='text-center'>Sorry, smth went wrong</ErrorMsg>}
+			<div className='moviePage'>{content}</div>
 		</PageLayout>
 	);
 }

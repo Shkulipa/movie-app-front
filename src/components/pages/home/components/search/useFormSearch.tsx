@@ -9,16 +9,17 @@ const initialValues: ISearchValues = {
   search: '',
 };
 
-export default function useFormSearch({ setSearch }: IUseFormSearch) {
+export default function useFormSearch({ fetchMovies }: IUseFormSearch) {
   const [t, setT] = useState<ReturnType<typeof setTimeout>>();
 
   const searchHandler = (
     { search }: ISearchValues
   ) => {
+    if(search.length < 3) return;
     if (t) clearTimeout(t);
 		setT(
 			setTimeout(
-				() => setSearch(search),
+				() => fetchMovies({ search }),
 				500
 			)
 		);

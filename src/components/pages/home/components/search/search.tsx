@@ -4,8 +4,8 @@ import useFormSearch from './useFormSearch';
 import './search.styles.scss';
 import { ChangeEvent } from 'react';
 
-export default function Search({ setSearch,  ...props }: ISearchProps): JSX.Element {
-  const { formSearch, errorSearch } = useFormSearch({ setSearch });
+export default function Search({ fetchMovies, ...props }: ISearchProps): JSX.Element {
+  const { formSearch, errorSearch } = useFormSearch({ fetchMovies });
 
   const onChangeSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
     formSearch.handleChange(e);
@@ -17,7 +17,7 @@ export default function Search({ setSearch,  ...props }: ISearchProps): JSX.Elem
       <Input  
         name="search"
         className='searchInput'
-        placeholder='Find you movie...'
+        placeholder='Find your movie...'
         onChange={onChangeSearchInput}
         value={formSearch.values.search}
       />

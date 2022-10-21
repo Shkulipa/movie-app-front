@@ -1,25 +1,30 @@
-import { login } from "src/utils/pages/pages";
-import { useState } from "react";
-import { Link  } from "react-router-dom";
+import { movieFavorites, home } from "src/utils/pages/pages";
+import { Link } from "react-router-dom";
 import "./infoLogin.styles.scss";
-
-const auth = false;
+import { Loader } from "src/components";
+import useModalClickOutside from 'src/hooks/useModalClickOutside';
+import useLogout from './hooks/useLogout';
+import useContentLoginInfo from './hooks/useContentLoginInfo';
 
 export function InfoLogin() {
-  const [modal, setModal] = useState<boolean>(false);
+  const { isMenuOpen, toggleModal, refModal } = useModalClickOutside();
+  const { logoutHandler } = useLogout({ toggleModal });
+  const { isAuth, isLoading } = useContentLoginInfo({ toggleModal })
 
-  const toggleModal = () => setModal(s => !s);
-  const logout = () => console.log('logout');
+  if(isLoading) return <Loader />;
 
-  const infoUser = <div className='info' onClick={toggleModal}>test@gmail.com</div>;
-  const btnLogin = <Link to={login.path}>Login</Link>
-  const isAuth = auth ? infoUser : btnLogin;
   return (
     <>
-      <div className="infoLogin">
+      <div className="infoLogin" ref={refModal}>
         {isAuth}
+        {isMenuOpen &&
+          <nav className="modalAuth">
+            <Link to={home.path}>Home</Link>
+            <Link to={movieFavorites.path}>Favorites Movie</Link>
+            <p className="logoutBtn" onClick={logoutHandler}>logout</p>
+          </nav>
+        }
       </div>
-      {modal && <div className="modalAuth" onClick={logout}>logout</div>}
     </>
     
   )

@@ -1,30 +1,23 @@
-import { useState } from 'react';
-import { PageLayout, Movies } from 'src/components';
+import { PageLayout, Movies, Loader, ErrorMsg } from 'src/components';
 import Search from './components/search/search';
 
 import { moviesAPI } from 'src/services/movieAPI.service';
 
-export default function Home(): JSX.Element {
-	const [search, setSearch] = useState<string>('');
-  
-	const {
-		data: movies,
-		error,
-		isLoading,
-		refetch
-	} = moviesAPI.useFetchMoviesQuery(
-		{ search },
-    {
-      skip: true
-    }
-	);
+import "./home.styles.scss";
 
-  console.log(error)
+export default function Home(): JSX.Element {
+	const [fetchMovies, { isLoading, error, data }] =
+		moviesAPI.useFetchMoviesMutation();
+
+  const content = isLoading 
+    ? <Loader className='loaderHome' />
+    : <Movies movies={data || []} />;
 
 	return (
 		<PageLayout>
-			<Search setSearch={setSearch} />
-			<Movies movies={[]} />
+			<Search fetchMovies={fetchMovies} />
+      {error && <ErrorMsg className='text-center'>Sorry, smth went wrong</ErrorMsg>}
+      {content}
 		</PageLayout>
 	);
 }

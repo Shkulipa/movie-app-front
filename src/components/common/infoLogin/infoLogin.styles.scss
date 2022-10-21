@@ -1,5 +1,9 @@
 @import '~src/styles/variables.scss'; 
 
+.info {
+  cursor: pointer;
+}
+
 .infoLogin {
   display: flex;
   justify-content: flex-end;
@@ -7,7 +11,15 @@
 
 .modalAuth {
   position: absolute;
-  bottom: -15px;
+  display: grid;
+  gap: 15px;
+  background: $secondary-color;
+  border: $border-width solid $primary-color;
+  bottom: -125px;
   border-radius: $border-radius;
   padding: 10px;
+}
+
+.logoutBtn {
+  cursor: pointer;
 }

@@ -18,8 +18,8 @@ export const login: IPage = {
   path: "/login",
   element: <LazyLogin />
 };
-export const post: IPage = {
-  path: "/movie/:imdbID",
+export const movie: IPage = {
+  path: "/movie/:imdbid",
   element: <LazyMovie />
 };
 export const error404: IPage = {
@@ -42,4 +42,4 @@ export const error500: IPage = {
  };
 
 export const authPages: IPage[] = [movieFavorites];
-export const publicPages: IPage[] = [home, login, post, error404, error500];
+export const publicPages: IPage[] = [home, login, movie, error404, error500];

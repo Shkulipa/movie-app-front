@@ -1,5 +1,4 @@
 import { Movies, PageLayout } from "src/components";
-import { dataMovies } from "src/utils/dataMovies";
 import "./movieFavorites.styles.scss";
 
 export default function MovieFavorites(): JSX.Element {
@@ -11,7 +10,7 @@ export default function MovieFavorites(): JSX.Element {
   return (
     <PageLayout>
       <div className="movieFavorites">
-        <Movies movies={dataMovies}/>
+        {/* <Movies movies={[]}/> */}
       </div>
     </PageLayout>
   )

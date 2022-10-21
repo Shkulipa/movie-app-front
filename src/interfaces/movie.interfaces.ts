@@ -5,7 +5,7 @@ export interface IMovie {
   runtime: string;
   genre: string;
   director: string;
-  imdbID: string;
+  imdbid: string;
 }
 
-export interface IMoviePayload extends Pick<IMovie, 'title' | 'year' | 'imdbID'> {}
+export interface IMoviePayload extends Pick<IMovie, 'title' | 'year' | 'imdbid'> {}

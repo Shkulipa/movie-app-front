@@ -1,0 +1,11 @@
+@import '~src/styles/variables';
+
+.cardMovie {
+  display: grid;
+  gap: 15px;
+  width: fit-content;
+  max-width: 45vw;
+  padding: 15px;
+  border: $border-width solid $primary-color;
+  border-radius: $border-radius;
+}

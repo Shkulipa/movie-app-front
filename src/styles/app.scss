@@ -1,0 +1,43 @@
+@import './variables';
+
+html,
+body {
+  padding: 0;
+	margin: 0;
+	outline: none;
+  font-size: $s-text-size;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 400;
+  color: $primary-color;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+/* for inputs(search, logins inputs)  */
+.inputWrapper { position: relative; }
+.errorField {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+}

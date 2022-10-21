@@ -1,0 +1,20 @@
+@import '~src/styles/variables.scss';
+
+.btn {
+  width: fit-content;
+  padding: 10px 20px;
+  border: $border-width solid $primary-color;
+  border-radius: $border-radius;
+  background: $secondary-color;
+  font-weight: bold;
+  color: $primary-color;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    color: $secondary-color;
+    background: $primary-color;
+    transform: scale(1.05);
+    transition: $transition;
+  }
+}

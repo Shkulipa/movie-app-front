@@ -1,0 +1,13 @@
+@import '~src/styles/variables.scss'; 
+
+.input {
+  width: 100%;
+  border: none;
+  padding: 10px 15px;
+  font-size: $s-text-size;
+  border-bottom: $border-bottom;
+
+  background-color: transparent;
+
+  outline: none;
+}

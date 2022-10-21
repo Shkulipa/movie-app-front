@@ -1,0 +1,13 @@
+@import '~src/styles/variables.scss'; 
+
+.infoLogin {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modalAuth {
+  position: absolute;
+  bottom: -15px;
+  border-radius: $border-radius;
+  padding: 10px;
+}

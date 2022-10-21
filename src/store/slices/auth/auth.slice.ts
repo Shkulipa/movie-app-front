@@ -41,7 +41,7 @@ export const authSlice = createSlice({
       })
 
       /**
-       * @info Sign in
+       * @info Sign Up
        */
       .addCase(signUpAsync.pending, (state) => {
         state.isLoading = true;

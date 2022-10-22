@@ -9,6 +9,7 @@ export * from './common/errorMsg/errorMsg';
 export * from './common/htag/htag';
 export * from './common/cardMovie/cardMovie';
 export * from './common/ptag/ptag';
+export * from './common/starFavorite/starFavorite';
 
 // router
 export * from './router/index';

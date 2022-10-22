@@ -1,7 +1,15 @@
 .moviePage {
+  position: relative;
+  margin-top: 40px;
+
+  // 50px - height of header
+  // 40px - margin-top
+  height: calc(100vh - 90px);
+}
+
+.contenWrapper {
   display: grid;
   gap: 20px;
-  margin-top: 40px;
 }
 
 .actionPanel {

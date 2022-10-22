@@ -13,7 +13,7 @@ export default function useContentLoginInfo({
 	const { user, isLoading } = useAppSelector(s => s.auth);
 	const infoUser = (
 		<div className='info' onClick={toggleModal}>
-			test@gmail.com
+			Menu
 		</div>
 	);
 	const btnLogin = <Link to={login.path}>Login</Link>;

@@ -7,6 +7,7 @@ import { IPage } from "./pages.interfaces";
 const LazyHome = lazy(() => import("src/components/pages/home/home"));
 const LazyLogin = lazy(() => import("src/components/pages/login/login"));
 const LazyMovie = lazy(() => import("src/components/pages/movie/movie"));
+const LazyCreateMovie = lazy(() => import("src/components/pages/createMovie/createMovie"));
 const LazyError404 = lazy(() => import("src/components/pages/error404/error404"));
 const LazyError500 = lazy(() => import("src/components/pages/error500/error500"));
 
@@ -21,6 +22,10 @@ export const login: IPage = {
 export const movie: IPage = {
   path: "/movie/:imdbid",
   element: <LazyMovie />
+};
+export const createMovie: IPage = {
+  path: "/movie/create",
+  element: <LazyCreateMovie />
 };
 export const error404: IPage = {
   path: "*",
@@ -41,5 +46,5 @@ export const error500: IPage = {
    element: <LazyMovieFavorites />
  };
 
-export const authPages: IPage[] = [movieFavorites];
+export const authPages: IPage[] = [movieFavorites, createMovie];
 export const publicPages: IPage[] = [home, login, movie, error404, error500];

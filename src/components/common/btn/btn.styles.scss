@@ -17,4 +17,20 @@
     transform: scale(1.05);
     transition: $transition;
   }
+
+  &.disabled {
+    $color: rgba(0, 0, 0, 0.4);
+    $bg-color: rgba(0, 0, 0, 0.2);
+    color: $color;
+    background-color: $bg-color;
+    border-color: $bg-color;
+
+    &:hover {
+      transform: scale(1);
+      color: $color;
+      background: $bg-color;
+      transition: none;
+      cursor: not-allowed;
+    }
+  }
 }

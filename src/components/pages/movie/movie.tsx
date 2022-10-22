@@ -1,42 +1,76 @@
-import { moviesAPI } from 'src/services/movieAPI.service';
 import { useParams } from 'react-router-dom';
+import { useAppSelector } from 'src/hooks/redux';
+import InfoMovie from './components/infoMovie/infoMovie';
+import { moviesAPI } from 'src/services/movieAPI.service';
+import useFavoriteBtn from './hooks/useFavoriteBtn/useFavoriteBtn';
+import useDeleteMovieBtn from './hooks/useDeleteMovieBtn/useDeleteMovieBtn';
+import useModalClickOutside from 'src/hooks/useModalClickOutside';
 
-import { PageLayout, Ptag, Btn, Loader, ErrorMsg } from 'src/components';
+import { PageLayout, Btn, Loader, ErrorMsg } from 'src/components';
 
 import './movie.styles.scss';
+import ModalEdit from './components/modalEdit/modalEdit';
+import { useEffect, useState } from 'react';
+import { IMovie } from '@src/interfaces/movie.interfaces';
 
 export default function Movie(): JSX.Element {
 	const { imdbid } = useParams();
-	/**
-	 * @info
-	 * get movie data
-	 */
+	const { user } = useAppSelector(s => s.auth);
+
 	const {
 		data: movie,
 		error,
-		isLoading
-	} = moviesAPI.useFetchPostByIdQuery(imdbid as string, { skip: !imdbid });
+		isLoading,
+	} = moviesAPI.useFetchPostByIdQuery(imdbid as string);
+	const { errorFavorite, favoriteStart } = useFavoriteBtn({ imdbid: imdbid! });
+	const { btnDeleteMovie } = useDeleteMovieBtn({ imdbid: imdbid! });
+	const { isOpen, toggleModal } = useModalClickOutside();
+  const [movieData, setMovieData] = useState<IMovie>();
 
-	const content = isLoading ? <Loader /> :(
-		<>
-			<div className='actionPanel'>
-				
-				<Btn>Delete</Btn>
-				<Btn>Edit</Btn>
-			</div>
+  useEffect(() => {
+    setMovieData(movie)
+  }, [movie])
 
-			<Ptag size='s'>imdbid: {imdbid}</Ptag>
-			<Ptag size='s'>Title: {movie?.title}</Ptag>
-			<Ptag size='s'>Year: {movie?.year}</Ptag>
-			<Ptag size='s'>Genre: {movie?.genre}</Ptag>
-			<Ptag size='s'>Director: {movie?.director}</Ptag>
-		</>
+	const isActionPanel = user && (
+		<div className='actionPanel'>
+			{favoriteStart}
+			{btnDeleteMovie}
+			<Btn onClick={toggleModal}>Edit</Btn>
+		</div>
 	);
-  console.log(movie);
+
+	const infoMovieBLock = !error && !movie?.error && (
+		<div className='contenWrapper'>
+			{isActionPanel}
+			<InfoMovie movie={movieData} />
+		</div>
+	);
+
+	const content = isLoading ? <Loader /> : infoMovieBLock;
+
 	return (
 		<PageLayout>
-      {error && <ErrorMsg className='text-center'>Sorry, smth went wrong</ErrorMsg>}
-			<div className='moviePage'>{content}</div>
+			{movie?.error && (
+				<ErrorMsg className='mt-25 text-center'>{movie.error}</ErrorMsg>
+			)}
+			{(error || errorFavorite) && (
+				<ErrorMsg className='mt-25 text-center'>
+					{(error as any).data.message}
+				</ErrorMsg>
+			)}
+			{!error  && (
+				<div className='moviePage'>
+					{content}
+					{isOpen && movie && (
+						<ModalEdit
+							toggleModel={toggleModal}
+							initialValues={movie}
+							imdbid={imdbid!}
+              setMovieData={setMovieData}
+						/>
+					)}
+				</div>
+			)}
 		</PageLayout>
 	);
 }

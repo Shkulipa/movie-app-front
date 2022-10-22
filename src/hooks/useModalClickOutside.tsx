@@ -2,12 +2,12 @@ import { useRef, useState, useEffect } from "react";
 
 export default function useModalClickOutside() {
   const refModal = useRef<HTMLDivElement>(null)
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
-  const toggleModal = () => setIsMenuOpen(s => !s);
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const toggleModal = () => setIsOpen(s => !s);
   useEffect(() => {
     const checkIfClickedOutside = (e: MouseEvent) => {
-      if (isMenuOpen && refModal.current && !refModal.current.contains(e.target as Node)) {
-        setIsMenuOpen(false)
+      if (isOpen && refModal.current && !refModal.current.contains(e.target as Node)) {
+        setIsOpen(false)
       }
     }
 
@@ -16,7 +16,7 @@ export default function useModalClickOutside() {
     return () => {
       document.removeEventListener("click", checkIfClickedOutside)
     }
-  }, [isMenuOpen])
+  }, [isOpen])
 
-  return { isMenuOpen, toggleModal, refModal }
+  return { isOpen, toggleModal, refModal }
 }

@@ -9,13 +9,14 @@ export function Btn({
 	...props
 }: IBtn): JSX.Element {
   const isDisabled = disabled ? 'disabled' : '';
+  const text = disabled ? 'Not allowed' : children;
 
 	return (
     <button
       className={cn(['btn', isDisabled, className])}
       {...props}
     >
-      {children}
+      {text}
     </button>
   )
 }

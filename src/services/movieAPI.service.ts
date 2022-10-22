@@ -2,8 +2,10 @@ import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError 
 import { authSlice } from 'src/store/slices/auth/auth.slice';
 import { CONST } from 'src/interfaces/consts.interfaces';
 import { IAuthResponse } from 'src/interfaces/user.interfaces';
-import { IMovie, IMoviePayload } from 'src/interfaces/movie.interfaces';
+import { IIdMovie, IMovie, IMoviePayload, IMoviesFavoritePayload } from 'src/interfaces/movie.interfaces';
 import { IFetchPayload } from 'src/interfaces/fetchPosts.interfaces';
+import { TEmptyFunction } from '@src/interfaces/emptyObject.interfaces';
+import { IMovieEditPayload } from '@src/components/pages/movie/components/modalEdit/modalEdit.interfaces';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_API_URL,
@@ -71,7 +73,56 @@ export const moviesAPI = createApi({
         url: `/movie/${imdbid}`,
         method: "GET",
       }),
+      providesTags: () => [],
+    }),
+    fetchFavoriteMovies: build.query<IMoviesFavoritePayload, TEmptyFunction>({
+      query: () => {
+        return {
+          url: '/movie/favorite/collection',
+          method: "GET",
+        }
+      },
       providesTags: () => ["Movies"]
     }),
+    favoriteMovie: build.mutation<null, IIdMovie>({
+      query: (body) => {
+        const { imdbid } = body;
+
+        const options = ({
+          url: `/movie/favorite/${imdbid}`,
+          method: "POST"
+        });
+
+        return options;
+      },
+      invalidatesTags: () => ["Movies"]
+    }),
+    editMovies: build.mutation<{}, IMovieEditPayload>({
+      query: body => {
+        const { imdbid } = body;
+
+        return {
+          url: `/movie/${imdbid}`,
+          method: "PATCH",
+          body: {
+            ...body
+          }
+        }
+      },
+      invalidatesTags: () => ["Movies"],
+    }),
+    deleteMovie: build.mutation<null, IIdMovie>({
+      query: (body) => {
+        const { imdbid } = body;
+
+        const options = ({
+          url: `/movie/${imdbid}`,
+          method: "DELETE"
+        });
+
+        return options;
+      },
+      invalidatesTags: ["Movies"]
+    })
   })
 });

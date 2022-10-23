@@ -10,10 +10,7 @@ export const Ptag = ({
 	...props
 }: IPtagProps): JSX.Element => {
 	return (
-		<p
-			className={cn(["p", size, className])}
-			{...props}
-		>
+		<p className={cn(['p', size, className])} {...props}>
 			{children}
 		</p>
 	);

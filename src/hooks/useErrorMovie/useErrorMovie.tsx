@@ -17,9 +17,18 @@ export default function useErrorMovie({ form, error }: IUseErrorMovie) {
 	const errorDirector = form.errors.director && form.touched.director && (
 		<ErrorMsg>{form.errors.director}</ErrorMsg>
 	);
-  const errorFetch = error && (
-		<ErrorMsg className='errorCreateApi'>{(error as any).data.message}</ErrorMsg>
+	const errorFetch = error && (
+		<ErrorMsg className="errorCreateApi">
+			{(error as any).data.message}
+		</ErrorMsg>
 	);
 
-	return { errorFetch, errorTitle, errorYear, errorRuntime, errorGenre, errorDirector };
+	return {
+		errorFetch,
+		errorTitle,
+		errorYear,
+		errorRuntime,
+		errorGenre,
+		errorDirector
+	};
 }

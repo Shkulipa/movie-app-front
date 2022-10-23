@@ -9,7 +9,7 @@ export function ErrorMsg({
 	...props
 }: IErrorMsg): JSX.Element {
 	return (
-		<div className={cn(["errorMsg", className])} {...props}>
+		<div className={cn(['errorMsg', className])} {...props}>
 			{children}
 		</div>
 	);

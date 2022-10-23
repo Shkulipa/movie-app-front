@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from "./redux";
+import { useAppSelector } from './redux';
 
 /**
  * @info
@@ -14,10 +14,10 @@ import { useAppSelector } from "./redux";
  * 4. he will redirect to home
  */
 export function useCheckAuth() {
-  const { user } = useAppSelector(s => s.auth);
-  const history = useNavigate();
+	const { user } = useAppSelector(s => s.auth);
+	const history = useNavigate();
 
-  useEffect(() => {
-    if(user) history('/');
-  }, [user, history]);
+	useEffect(() => {
+		if (user) history('/');
+	}, [user, history]);
 }

@@ -18,13 +18,11 @@ export default function Login(): JSX.Element {
 			<FormSignUp toggleForm={toggleForm} />
 		</div>
 	);
-  const content = isLoading ? <Loader /> : forms;
+	const content = isLoading ? <Loader /> : forms;
 
 	return (
 		<Container>
-			<div className='login'>
-        {content}
-      </div>
+			<div className="login">{content}</div>
 		</Container>
 	);
 }

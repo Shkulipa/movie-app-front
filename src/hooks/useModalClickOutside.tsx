@@ -1,8 +1,8 @@
 import { useRef, useState, useEffect } from 'react';
 
-type IUseModalClickOutsideProps ={
+type IUseModalClickOutsideProps = {
 	excludeClickByIds?: string[];
-}
+};
 
 export default function useModalClickOutside({
 	excludeClickByIds = []

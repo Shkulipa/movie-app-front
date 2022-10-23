@@ -3,20 +3,17 @@ import useFavoriteHandler from './useFavoriteHandler';
 
 export function StarFavorite({
 	isFavorite,
-  ...props
+	...props
 }: IStarFavoriteProps): JSX.Element {
-	const {
-		onMouseOverFavorite,
-		onMouseOutFavorite,
-		isFavoriteHandler
-	} = useFavoriteHandler({ isFavorite });
+	const { onMouseOverFavorite, onMouseOutFavorite, isFavoriteHandler } =
+		useFavoriteHandler({ isFavorite });
 
 	return (
 		<div
-			className='starWrapper'
+			className="starWrapper"
 			onMouseOver={onMouseOverFavorite}
 			onMouseOut={onMouseOutFavorite}
-      {...props}
+			{...props}
 		>
 			{isFavoriteHandler()}
 		</div>

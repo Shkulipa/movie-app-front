@@ -15,7 +15,7 @@ import {
 	IMoviesFavoritePayload
 } from 'src/interfaces/movie.interfaces';
 import { IFetchPayload } from 'src/interfaces/fetchPosts.interfaces';
-import { TEmptyFunction } from 'src/interfaces/emptyObject.interfaces';
+import { TEmptyObj } from 'src/interfaces/emptyObject.interfaces';
 import { IMovieEditPayload } from 'src/components/pages/movie/components/modalEdit/modalEdit.interfaces';
 import {
 	IMovieCreateResponsePayload,
@@ -96,7 +96,7 @@ export const moviesAPI = createApi({
 			}),
 			providesTags: () => []
 		}),
-		fetchFavoriteMovies: build.query<IMoviesFavoritePayload, TEmptyFunction>({
+		fetchFavoriteMovies: build.query<IMoviesFavoritePayload, TEmptyObj>({
 			query: () => {
 				return {
 					url: '/movie/favorite/collection',
@@ -118,7 +118,7 @@ export const moviesAPI = createApi({
 			},
 			invalidatesTags: () => ['Movies']
 		}),
-		editMovies: build.mutation<{}, IMovieEditPayload>({
+		editMovies: build.mutation<Record<string, never>, IMovieEditPayload>({
 			query: body => {
 				const { imdbid } = body;
 

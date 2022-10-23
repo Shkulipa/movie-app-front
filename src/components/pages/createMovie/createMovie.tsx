@@ -34,7 +34,7 @@ export default function CreateMovie(): JSX.Element {
 					`Movie created! id: ${imdbid}`,
 					optionsToaster(imdbid)
 				);
-        resetForm();
+				resetForm();
 			})
 			.catch(err => {
 				console.error(err);
@@ -59,56 +59,56 @@ export default function CreateMovie(): JSX.Element {
 
 	return (
 		<PageLayout>
-			<form className='createMovieForm' onSubmit={formCreateMovie.handleSubmit}>
-				<div className='inputEditWrapper'>
+			<form className="createMovieForm" onSubmit={formCreateMovie.handleSubmit}>
+				<div className="inputEditWrapper">
 					<Input
-						name='title'
-						placeholder='Title...'
+						name="title"
+						placeholder="Title..."
 						onChange={formCreateMovie.handleChange}
 						value={formCreateMovie.values.title}
 					/>
 					{errorTitle}
 				</div>
-				<div className='inputEditWrapper'>
+				<div className="inputEditWrapper">
 					<Input
-						name='year'
-						placeholder='Year...'
-						type='number'
+						name="year"
+						placeholder="Year..."
+						type="number"
 						onChange={formCreateMovie.handleChange}
 						value={formCreateMovie.values.year}
 					/>
 					{errorYear}
 				</div>
-				<div className='inputEditWrapper'>
+				<div className="inputEditWrapper">
 					<Input
-						name='genre'
-						placeholder='Genre...'
+						name="genre"
+						placeholder="Genre..."
 						onChange={formCreateMovie.handleChange}
 						value={formCreateMovie.values.genre}
 					/>
 					{errorGenre}
 				</div>
-				<div className='inputEditWrapper'>
+				<div className="inputEditWrapper">
 					<Input
-						name='runtime'
-						placeholder='Runtime...'
+						name="runtime"
+						placeholder="Runtime..."
 						onChange={formCreateMovie.handleChange}
 						value={formCreateMovie.values.runtime}
 					/>
 					{errorRuntime}
 				</div>
-				<div className='inputEditWrapper'>
+				<div className="inputEditWrapper">
 					<Input
-						name='director'
-						placeholder='Director...'
+						name="director"
+						placeholder="Director..."
 						onChange={formCreateMovie.handleChange}
 						value={formCreateMovie.values.director}
 					/>
 					{errorDirector}
 				</div>
 				<Btn
-					className='btnCreate'
-					type='submit'
+					className="btnCreate"
+					type="submit"
 					disabled={!formCreateMovie.isValid || isLoading}
 				>
 					Create Movie

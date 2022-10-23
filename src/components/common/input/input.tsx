@@ -1,6 +1,6 @@
-import cn from "src/helpers/className.helper";
-import { IInputProps } from "./input.interface";
-import "./input.styles.scss";
+import cn from 'src/helpers/className.helper';
+import { IInputProps } from './input.interface';
+import './input.styles.scss';
 
 export function Input({
 	className,

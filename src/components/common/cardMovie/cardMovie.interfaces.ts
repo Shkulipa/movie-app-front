@@ -3,6 +3,6 @@ import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
 export interface ICardMovieProps
 	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-    idx: number;
-    movie: IMoviePayload;
-  }
+	idx: number;
+	movie: IMoviePayload;
+}

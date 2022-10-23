@@ -38,17 +38,17 @@ export default function Movie(): JSX.Element {
 	}, [movie]);
 
 	const isActionPanel = user && (
-		<div className='actionPanel'>
+		<div className="actionPanel">
 			{favoriteStart}
 			{btnDeleteMovie}
-			<Btn id='btnEdit' onClick={toggleModal}>
+			<Btn id="btnEdit" onClick={toggleModal}>
 				Edit
 			</Btn>
 		</div>
 	);
 
 	const infoMovieBLock = !error && !movie?.error && (
-		<div className='contenWrapper'>
+		<div className="contenWrapper">
 			{isActionPanel}
 			<InfoMovie movie={movieData} />
 		</div>
@@ -59,15 +59,15 @@ export default function Movie(): JSX.Element {
 	return (
 		<PageLayout>
 			{movie?.error && (
-				<ErrorMsg className='mt-25 text-center'>{movie.error}</ErrorMsg>
+				<ErrorMsg className="mt-25 text-center">{movie.error}</ErrorMsg>
 			)}
 			{(error || errorFavorite) && (
-				<ErrorMsg className='mt-25 text-center'>
+				<ErrorMsg className="mt-25 text-center">
 					{(error as any).data.message}
 				</ErrorMsg>
 			)}
 			{!error && (
-				<div className='moviePage'>
+				<div className="moviePage">
 					{content}
 					{isOpen && movieData && (
 						<ModalEdit

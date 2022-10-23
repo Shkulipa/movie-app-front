@@ -5,5 +5,5 @@ export interface IMoviesProps
 	extends PropsWithChildren<
 		DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 	> {
-    movies: IMoviePayload[];
-  }
+	movies: IMoviePayload[];
+}

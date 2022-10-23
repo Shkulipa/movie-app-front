@@ -12,7 +12,7 @@ export default function useContentLoginInfo({
 }: IUseContentLoginInfoProps) {
 	const { user, isLoading } = useAppSelector(s => s.auth);
 	const infoUser = (
-		<div className='info' onClick={toggleModal}>
+		<div className="info" onClick={toggleModal}>
 			Menu
 		</div>
 	);

@@ -9,17 +9,17 @@ import 'src/styles/app.scss';
 import 'src/styles/common.scss';
 
 function App() {
-  const dispatch = useAppDispatch();
-  const { setUser } = authSlice.actions;
+	const dispatch = useAppDispatch();
+	const { setUser } = authSlice.actions;
 
-  useEffect(() => {
-    const user = localStorage.getItem(CONST.LOCAL_STORAGE_USER) as unknown as IUser;
-    if(user) dispatch(setUser(user));
-  }, [])
+	useEffect(() => {
+		const user = localStorage.getItem(
+			CONST.LOCAL_STORAGE_USER
+		) as unknown as IUser;
+		if (user) dispatch(setUser(user));
+	}, []);
 
-  return (
-    <Router />
-  );
+	return <Router />;
 }
 
 export default App;

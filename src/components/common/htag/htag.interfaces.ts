@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren } from 'react';
 
 type THeading = 'h1' | 'h2' | 'h3';
 export interface IHtagProps extends PropsWithChildren {

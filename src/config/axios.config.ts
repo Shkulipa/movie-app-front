@@ -5,24 +5,24 @@ import { IAuthResponse } from 'src/interfaces/user.interfaces';
 const config: AxiosRequestConfig = {
 	baseURL: process.env.REACT_APP_API_URL,
 	responseType: 'json',
-	withCredentials: true,
+	withCredentials: true
 };
 
 export const $apiPublic = axios.create(config);
 export const $apiPrivate = axios.create(config);
 
 /**
- * @info 
+ * @info
  * refresh token
  */
 $apiPrivate.interceptors.request.use(
 	config => {
-    /**
-     * @info
-     * for every request
-     * where you need to have a token
-     * we attach access token in the header
-     */
+		/**
+		 * @info
+		 * for every request
+		 * where you need to have a token
+		 * we attach access token in the header
+		 */
 		if (config?.headers) {
 			const parsedUser = localStorage.getItem(
 				CONST.LOCAL_STORAGE_USER
@@ -42,25 +42,25 @@ $apiPrivate.interceptors.request.use(
 			originalRequest._isRetry = true;
 
 			try {
-        /**
-         * @info
-         * we can call a $apiPublic because
-         * we set a refresh token in the cookies
-         */
+				/**
+				 * @info
+				 * we can call a $apiPublic because
+				 * we set a refresh token in the cookies
+				 */
 				const user = await $apiPublic.post<IAuthResponse>('/refresh-token', {
 					withCredentials: true
 				});
 
-        /**
-         * @info
-         * refresh token local
-         */
+				/**
+				 * @info
+				 * refresh token local
+				 */
 				localStorage.setItem(CONST.LOCAL_STORAGE_USER, JSON.stringify(user));
 
-        /**
-         * @info
-         * make request again
-         */
+				/**
+				 * @info
+				 * make request again
+				 */
 				return $apiPrivate.request(originalRequest);
 			} catch (err) {
 				console.error(err);

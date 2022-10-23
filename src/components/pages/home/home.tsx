@@ -3,21 +3,25 @@ import Search from './components/search/search';
 
 import { moviesAPI } from 'src/services/movieAPI.service';
 
-import "./home.styles.scss";
+import './home.styles.scss';
 
 export default function Home(): JSX.Element {
 	const [fetchMovies, { isLoading, error, data }] =
 		moviesAPI.useFetchMoviesMutation();
 
-  const content = isLoading 
-    ? <Loader className='loaderHome' />
-    : <Movies movies={data || []} />;
+	const content = isLoading ? (
+		<Loader className="loaderHome" />
+	) : (
+		<Movies movies={data || []} />
+	);
 
 	return (
 		<PageLayout>
 			<Search fetchMovies={fetchMovies} />
-      {error && <ErrorMsg className='text-center'>Sorry, smth went wrong</ErrorMsg>}
-      {content}
+			{error && (
+				<ErrorMsg className="text-center">Sorry, smth went wrong</ErrorMsg>
+			)}
+			{content}
 		</PageLayout>
 	);
 }

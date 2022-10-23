@@ -5,7 +5,7 @@ import storage from 'redux-persist/lib/storage';
  * example persist:
  * https://codesandbox.io/s/redux-persist-example-5s6yc?file=/store.js
  */
- export const persistConfig = {
+export const persistConfig = {
 	key: 'root',
 	storage,
 	whitelist: ['auth']

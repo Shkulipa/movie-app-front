@@ -1,5 +1,5 @@
-import { IMovie } from "src/interfaces/movie.interfaces";
+import { IMovie } from 'src/interfaces/movie.interfaces';
 
 export interface IInfoMovieProps {
-  movie?: IMovie;
+	movie?: IMovie;
 }

@@ -1,1 +1,1 @@
-export type TEmptyFunction = {};
+export type TEmptyObj = Record<string, unknown>;

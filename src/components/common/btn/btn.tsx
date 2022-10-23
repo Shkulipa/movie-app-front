@@ -8,15 +8,12 @@ export function Btn({
 	disabled,
 	...props
 }: IBtn): JSX.Element {
-  const isDisabled = disabled ? 'disabled' : '';
-  const text = disabled ? 'Not allowed' : children;
+	const isDisabled = disabled ? 'disabled' : '';
+	const text = disabled ? 'Not allowed' : children;
 
 	return (
-    <button
-      className={cn(['btn', isDisabled, className])}
-      {...props}
-    >
-      {text}
-    </button>
-  )
+		<button className={cn(['btn', isDisabled, className])} {...props}>
+			{text}
+		</button>
+	);
 }

@@ -1,3 +1,3 @@
 export interface IFetchPayload {
-  search: string, 
+	search: string;
 }

@@ -20,13 +20,11 @@ export default function useFavoriteBtn({
 
 	const toogleFavorite = () => {
 		const textFavoriteToogle = isFavoriteToggle ? 'deleted from' : 'added to';
-    const msg = `Movie was ${textFavoriteToogle} Favorites!`;
+		const msg = `Movie was ${textFavoriteToogle} Favorites!`;
 
 		favoriteMovieHandler({ imdbid })
 			.unwrap()
-			.then(() =>
-				toastr.success('Status', msg)
-			)
+			.then(() => toastr.success('Status', msg))
 			.catch(err => {
 				console.error(err);
 				toastr.error('Status', 'Smth went wrong, please try later');

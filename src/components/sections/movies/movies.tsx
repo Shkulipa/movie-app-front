@@ -4,8 +4,12 @@ import './movies.styles.scss';
 
 export function Movies({ movies }: IMoviesProps): JSX.Element {
 	const mapping = movies.map((movie, idx) => (
-		<CardMovie key={movie.imdbid + movie.title + idx} movie={movie as any} idx={idx} />
+		<CardMovie
+			key={movie.imdbid + movie.title + idx}
+			movie={movie as any}
+			idx={idx}
+		/>
 	));
 
-	return <div className='moviesHome'>{mapping}</div>;
+	return <div className="moviesHome">{mapping}</div>;
 }

@@ -7,13 +7,13 @@ interface IUseLogoutProps {
 }
 
 export default function useLogout({ toggleModal }: IUseLogoutProps) {
-  const dispatch = useAppDispatch();
-  const history = useNavigate();
-  const logoutHandler = () => {
-    dispatch(logoutAsync());
-    toggleModal();
-    history('/');
-  }
+	const dispatch = useAppDispatch();
+	const history = useNavigate();
+	const logoutHandler = () => {
+		dispatch(logoutAsync());
+		toggleModal();
+		history('/');
+	};
 
-  return { logoutHandler };
+	return { logoutHandler };
 }

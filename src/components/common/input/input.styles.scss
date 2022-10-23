@@ -1,13 +1,11 @@
-@import '~src/styles/variables.scss'; 
+@import '~src/styles/variables'; 
 
 .input {
   width: 100%;
-  border: none;
   padding: 10px 15px;
   font-size: $s-text-size;
-  border-bottom: $border-bottom;
-
   background-color: transparent;
-
+  border: none;
+  border-bottom: $border-bottom;
   outline: none;
 }

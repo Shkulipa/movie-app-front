@@ -1,10 +1,10 @@
 .moviePage {
   position: relative;
-  margin-top: 40px;
 
   // 50px - height of header
   // 40px - margin-top
   height: calc(100vh - 90px);
+  margin-top: 40px;
 }
 
 .contenWrapper {
@@ -14,10 +14,10 @@
 
 .actionPanel {
   display: flex;
-  width: 50%;
-  justify-content: center;
-  margin: 0 auto;
   gap: 50px;
+  justify-content: center;
+  width: 50%;
+  margin: 0 auto;
 }
 
 .starWrapper {

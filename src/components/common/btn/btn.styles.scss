@@ -1,36 +1,37 @@
-@import '~src/styles/variables.scss';
+@import '~src/styles/variables';
 
 .btn {
   width: fit-content;
   padding: 10px 20px;
-  border: $border-width solid $primary-color;
-  border-radius: $border-radius;
-  background: $secondary-color;
   font-weight: bold;
   color: $primary-color;
   cursor: pointer;
+  background: $secondary-color;
+  border: $border-width solid $primary-color;
+  border-radius: $border-radius;
   transition: $transition;
 
   &:hover {
     color: $secondary-color;
     background: $primary-color;
-    transform: scale(1.05);
     transition: $transition;
+    transform: scale(1.05);
   }
 
   &.disabled {
-    $color: rgba(0, 0, 0, 0.4);
-    $bg-color: rgba(0, 0, 0, 0.2);
+    $color: rgb(0 0 0 / 40%);
+    $bg-color: rgb(0 0 0 / 20%);
+
     color: $color;
     background-color: $bg-color;
     border-color: $bg-color;
 
     &:hover {
-      transform: scale(1);
       color: $color;
+      cursor: not-allowed;
       background: $bg-color;
       transition: none;
-      cursor: not-allowed;
+      transform: scale(1);
     }
   }
 }

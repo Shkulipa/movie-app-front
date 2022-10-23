@@ -1,16 +1,17 @@
-.text-center {
+.textCenter {
   text-align: center;
 }
 
-.mt-25 {
+.mt25 {
   margin-top: 25px;
 }
 
 /* for inputs(search, logins inputs)  */
 .inputWrapper { position: relative; }
+
 .errorField {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
   right: 0;
+  transform: translateY(-50%);
 }

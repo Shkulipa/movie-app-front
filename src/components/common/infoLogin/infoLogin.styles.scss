@@ -1,4 +1,4 @@
-@import '~src/styles/variables.scss'; 
+@import '~src/styles/variables'; 
 
 .info {
   cursor: pointer;
@@ -11,13 +11,13 @@
 
 .modalAuth {
   position: absolute;
+  bottom: -125px;
   display: grid;
   gap: 15px;
+  padding: 10px;
   background: $secondary-color;
   border: $border-width solid $primary-color;
-  bottom: -125px;
   border-radius: $border-radius;
-  padding: 10px;
 }
 
 .logoutBtn {

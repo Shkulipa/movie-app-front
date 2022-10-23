@@ -1,12 +1,12 @@
 .createMovieForm {
   display: grid;
-  width: 40%;
-  margin: 50px auto 0 auto;
   gap: 10px;
+  width: 40%;
+  margin: 50px auto 0;
 }
 
 .btnCreate {
-  margin: 25px auto 0 auto;
+  margin: 25px auto 0;
 }
 
 .errorCreateApi {

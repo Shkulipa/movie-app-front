@@ -59,10 +59,10 @@ export default function Movie(): JSX.Element {
 	return (
 		<PageLayout>
 			{movie?.error && (
-				<ErrorMsg className="mt-25 text-center">{movie.error}</ErrorMsg>
+				<ErrorMsg className="mt25 textCenter">{movie.error}</ErrorMsg>
 			)}
 			{(error || errorFavorite) && (
-				<ErrorMsg className="mt-25 text-center">
+				<ErrorMsg className="mt25 textCenter">
 					{(error as any).data.message}
 				</ErrorMsg>
 			)}

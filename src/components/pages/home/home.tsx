@@ -19,7 +19,7 @@ export default function Home(): JSX.Element {
 		<PageLayout>
 			<Search fetchMovies={fetchMovies} />
 			{error && (
-				<ErrorMsg className="text-center">Sorry, smth went wrong</ErrorMsg>
+				<ErrorMsg className="textCenter">Sorry, smth went wrong</ErrorMsg>
 			)}
 			{content}
 		</PageLayout>

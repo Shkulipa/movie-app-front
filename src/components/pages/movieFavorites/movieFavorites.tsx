@@ -11,7 +11,7 @@ export default function MovieFavorites(): JSX.Element {
 		<PageLayout>
 			<div className="movieFavorites">
 				{error && (
-					<ErrorMsg className="text-center">Sorry, smth went wrong</ErrorMsg>
+					<ErrorMsg className="textCenter">Sorry, smth went wrong</ErrorMsg>
 				)}
 				{content}
 			</div>

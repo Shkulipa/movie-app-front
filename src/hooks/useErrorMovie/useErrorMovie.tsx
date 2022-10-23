@@ -18,7 +18,7 @@ export default function useErrorMovie({ form, error }: IUseErrorMovie) {
 		<ErrorMsg>{form.errors.director}</ErrorMsg>
 	);
   const errorFetch = error && (
-		<ErrorMsg>Smth went wrong, please try later</ErrorMsg>
+		<ErrorMsg className='errorCreateApi'>{(error as any).data.message}</ErrorMsg>
 	);
 
 	return { errorFetch, errorTitle, errorYear, errorRuntime, errorGenre, errorDirector };

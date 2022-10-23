@@ -17,27 +17,33 @@ export default function Movie(): JSX.Element {
 	const { imdbid } = useParams();
 	const { user } = useAppSelector(s => s.auth);
 
+	const [movieData, setMovieData] = useState<IMovie>();
+
 	const {
 		data: movie,
 		error,
-		isLoading,
+		isLoading
 	} = moviesAPI.useFetchPostByIdQuery(imdbid as string);
-	const { errorFavorite, favoriteStart } = useFavoriteBtn({ imdbid: imdbid! });
+	const { errorFavorite, favoriteStart } = useFavoriteBtn({
+		imdbid: imdbid!,
+		isFavorite: movie?.isFavorite
+	});
 	const { btnDeleteMovie } = useDeleteMovieBtn({ imdbid: imdbid! });
-	const { isOpen, toggleModal, refModal } = useModalClickOutside({
-    excludeClickByIds: ['btnEdit']
-  });
-  const [movieData, setMovieData] = useState<IMovie>();
+	const { isOpen, toggleModal, refModal, setIsOpen } = useModalClickOutside({
+		excludeClickByIds: ['btnEdit']
+	});
 
-  useEffect(() => {
-    setMovieData(movie)
-  }, [movie])
+	useEffect(() => {
+		setMovieData(movie);
+	}, [movie]);
 
 	const isActionPanel = user && (
 		<div className='actionPanel'>
 			{favoriteStart}
 			{btnDeleteMovie}
-			<Btn id='btnEdit' onClick={toggleModal}>Edit</Btn>
+			<Btn id='btnEdit' onClick={toggleModal}>
+				Edit
+			</Btn>
 		</div>
 	);
 
@@ -63,15 +69,15 @@ export default function Movie(): JSX.Element {
 			{!error && (
 				<div className='moviePage'>
 					{content}
-          {isOpen && movie && (
-            <ModalEdit
-              ref={refModal}
-              toggleModel={() => {}}
-              initialValues={movie}
-              imdbid={imdbid!}
-              setMovieData={setMovieData}
-            />
-          )}
+					{isOpen && movieData && (
+						<ModalEdit
+							ref={refModal}
+							setIsOpen={setIsOpen}
+							initialValues={movieData}
+							imdbid={imdbid!}
+							setMovieData={setMovieData}
+						/>
+					)}
 				</div>
 			)}
 		</PageLayout>

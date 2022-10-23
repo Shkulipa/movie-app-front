@@ -1,25 +1,25 @@
 import { movieValidation } from 'src/validations/movie.validation';
 import { useFormik } from 'formik';
-import { IModalEditProps } from './modalEdit.interfaces';
+import { toastr } from 'react-redux-toastr';
 import './modalEdit.styles.scss';
 import { Btn, Input } from 'src/components';
 import useErrorMovie from 'src/hooks/useErrorMovie/useErrorMovie';
 import { IMovie, IValuesMovie } from 'src/interfaces/movie.interfaces';
 import { moviesAPI } from 'src/services/movieAPI.service';
 import { forwardRef, useEffect } from 'react';
+import { IModalEditProps } from './modalEdit.interfaces';
 
 const ModalEdit = forwardRef(({
-	toggleModel,
+	setIsOpen,
 	initialValues,
 	imdbid,
   setMovieData,
-}: any, ref: any): JSX.Element => {
-	const [editMovie, { error, isLoading, isSuccess, originalArgs }] = moviesAPI.useEditMoviesMutation();
+}: IModalEditProps, ref: any): JSX.Element => {
+	const [editMovie, { error, isLoading, originalArgs, isSuccess }] = moviesAPI.useEditMoviesMutation();
 
   useEffect(() => {
     if(isSuccess) {
       setMovieData(originalArgs as IMovie);
-      toggleModel();
     }
   }, [isSuccess, originalArgs])
 
@@ -28,7 +28,11 @@ const ModalEdit = forwardRef(({
 			...values,
 			imdbid
 		};
-		editMovie(body);
+		editMovie(body)
+      .unwrap().then(() => {
+        setIsOpen(false);
+        toastr.success('Status', 'Movie updated!');
+      });
 	};
 
 	const formEditMovie = useFormik<IValuesMovie>({
@@ -46,7 +50,7 @@ const ModalEdit = forwardRef(({
 	return (
 		<div className='modalEdit' ref={ref}>
 			<div className='modalEditContainer'>
-				<div className='close' onClick={toggleModel}>
+				<div className='close' onClick={() => setIsOpen(false)}>
 					close
 				</div>
         {errorFetch}
@@ -92,7 +96,7 @@ const ModalEdit = forwardRef(({
 					<div className='inputEditWrapper'>
 						<Input
 							name='director'
-							placeholder='Genre...'
+							placeholder='Director...'
 							onChange={formEditMovie.handleChange}
 							value={formEditMovie.values.director}
 						/>

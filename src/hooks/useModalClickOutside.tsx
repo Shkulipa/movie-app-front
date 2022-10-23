@@ -29,5 +29,5 @@ export default function useModalClickOutside({
 		};
 	}, [isOpen]);
 
-	return { isOpen, toggleModal, refModal };
+	return { isOpen, toggleModal, refModal, setIsOpen };
 }

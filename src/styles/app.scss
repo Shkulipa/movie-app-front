@@ -1,3 +1,5 @@
+@import 'react-redux-toastr/src/styles/index';
+
 @import './variables';
 
 html,
@@ -31,13 +33,4 @@ h4,
 h5,
 h6 {
   margin: 0;
-}
-
-/* for inputs(search, logins inputs)  */
-.inputWrapper { position: relative; }
-.errorField {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 0;
 }

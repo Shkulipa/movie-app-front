@@ -8,10 +8,10 @@ export default function InfoMovie({ movie }: IInfoMovieProps): JSX.Element {
 
   return (
     <>
-      <Ptag size='s'>Title: {m?.title}</Ptag>
-      <Ptag size='s'>Year: {m?.year}</Ptag>
-      <Ptag size='s'>Genre: {m?.genre}</Ptag>
-      <Ptag size='s'>Director: {m?.director}</Ptag>
+      <Ptag size='s'>Title: {m?.title || 'N/A'}</Ptag>
+      <Ptag size='s'>Year: {m?.year || 'N/A'}</Ptag>
+      <Ptag size='s'>Genre: {m?.genre || 'N/A'}</Ptag>
+      <Ptag size='s'>Director: {m?.director || 'N/A'}</Ptag>
     </>
   )
 }

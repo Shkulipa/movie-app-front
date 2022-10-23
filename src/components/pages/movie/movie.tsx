@@ -24,7 +24,9 @@ export default function Movie(): JSX.Element {
 	} = moviesAPI.useFetchPostByIdQuery(imdbid as string);
 	const { errorFavorite, favoriteStart } = useFavoriteBtn({ imdbid: imdbid! });
 	const { btnDeleteMovie } = useDeleteMovieBtn({ imdbid: imdbid! });
-	const { isOpen, toggleModal } = useModalClickOutside();
+	const { isOpen, toggleModal, refModal } = useModalClickOutside({
+    excludeClickByIds: ['btnEdit']
+  });
   const [movieData, setMovieData] = useState<IMovie>();
 
   useEffect(() => {
@@ -35,7 +37,7 @@ export default function Movie(): JSX.Element {
 		<div className='actionPanel'>
 			{favoriteStart}
 			{btnDeleteMovie}
-			<Btn onClick={toggleModal}>Edit</Btn>
+			<Btn id='btnEdit' onClick={toggleModal}>Edit</Btn>
 		</div>
 	);
 
@@ -58,17 +60,18 @@ export default function Movie(): JSX.Element {
 					{(error as any).data.message}
 				</ErrorMsg>
 			)}
-			{!error  && (
+			{!error && (
 				<div className='moviePage'>
 					{content}
-					{isOpen && movie && (
-						<ModalEdit
-							toggleModel={toggleModal}
-							initialValues={movie}
-							imdbid={imdbid!}
+          {isOpen && movie && (
+            <ModalEdit
+              ref={refModal}
+              toggleModel={() => {}}
+              initialValues={movie}
+              imdbid={imdbid!}
               setMovieData={setMovieData}
-						/>
-					)}
+            />
+          )}
 				</div>
 			)}
 		</PageLayout>

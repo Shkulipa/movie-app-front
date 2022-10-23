@@ -7,7 +7,7 @@ import useLogout from './hooks/useLogout';
 import useContentLoginInfo from './hooks/useContentLoginInfo';
 
 export function InfoLogin() {
-  const { isOpen, toggleModal, refModal } = useModalClickOutside();
+  const { isOpen, toggleModal, refModal } = useModalClickOutside({});
   const { logoutHandler } = useLogout({ toggleModal });
   const { isAuth, isLoading } = useContentLoginInfo({ toggleModal })
 

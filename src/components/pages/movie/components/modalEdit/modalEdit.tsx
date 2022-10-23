@@ -6,14 +6,14 @@ import { Btn, Input } from 'src/components';
 import useErrorMovie from 'src/hooks/useErrorMovie/useErrorMovie';
 import { IMovie, IValuesMovie } from 'src/interfaces/movie.interfaces';
 import { moviesAPI } from 'src/services/movieAPI.service';
-import { useEffect } from 'react';
+import { forwardRef, useEffect } from 'react';
 
-const ModalEdit = ({
+const ModalEdit = forwardRef(({
 	toggleModel,
 	initialValues,
 	imdbid,
-  setMovieData
-}: IModalEditProps): JSX.Element => {
+  setMovieData,
+}: any, ref: any): JSX.Element => {
 	const [editMovie, { error, isLoading, isSuccess, originalArgs }] = moviesAPI.useEditMoviesMutation();
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const ModalEdit = ({
 		useErrorMovie({ form: formEditMovie, error });
 
 	return (
-		<div className='modalEdit'>
+		<div className='modalEdit' ref={ref}>
 			<div className='modalEditContainer'>
 				<div className='close' onClick={toggleModel}>
 					close
@@ -109,6 +109,6 @@ const ModalEdit = ({
 			</div>
 		</div>
 	);
-};
+});
 
 export default ModalEdit;

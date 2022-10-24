@@ -17,10 +17,7 @@ export const signInAsync = createAsyncThunk(
 			});
 			const user = response.data;
 
-			localStorage.setItem(
-				CONST.LOCAL_STORAGE_USER,
-				JSON.stringify(user.accessToken)
-			);
+			localStorage.setItem(CONST.LOCAL_STORAGE_USER, user.accessToken);
 
 			return user;
 		} catch (error) {

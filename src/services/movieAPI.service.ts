@@ -25,11 +25,9 @@ import {
 const baseQuery = fetchBaseQuery({
 	baseUrl: process.env.REACT_APP_API_URL,
 	prepareHeaders: headers => {
-		const getUser = localStorage.getItem(CONST.LOCAL_STORAGE_USER) as string;
-		const parsedUser = getUser && (JSON.parse(getUser) as IAuthResponse);
-		const accessToken = parsedUser && parsedUser.accessToken;
-		if (accessToken) {
-			headers.set('authorization', `Bearer ${accessToken}`);
+		const getToken = localStorage.getItem(CONST.LOCAL_STORAGE_USER) as string;
+		if (getToken) {
+			headers.set('authorization', `Bearer ${getToken}`);
 		}
 		return headers;
 	},
